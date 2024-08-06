@@ -4,7 +4,8 @@ import newNote from '../../utils/icons/new-note.svg';
 
 const Dashboard = () => {
     const [notes, setNotes] = useState([]);
-    const [nextId, setNextId] = useState(1); // Add an ID counter
+    const [nextId, setNextId] = useState(1); // Add an ID 
+    const [newNotEnable, setNewNotEnable] = useState(false);
 
     const addNote = () => {
         setNotes([...notes, { id: nextId, content: 'New Note' }]);
@@ -14,7 +15,7 @@ const Dashboard = () => {
     return (
         <div className="bg-gray-700 min-h-[calc(100vh-64px)] max-w-[100vw] overflow-x-hidden relative flex flex-col items-center">
             <p className="text-gray-200 text-5xl py-4">Sticky Notes</p>
-            <div className='flex w-10/12 justify-center'>
+            <div className='flex w-10/12 justify-start'>
                 <div className='flex gap-2 flex-wrap'>
                     {notes.map(note => (
                         <Note key={note.id} content={note.content} />
