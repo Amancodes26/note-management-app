@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Note from "../notes/Note";
 import newNote from "../../utils/icons/new-note.svg";
 import NewNote from "../notes/NewNote";
+// import axios from 'axios';
 
 const Dashboard = () => {
     const [notes, setNotes] = useState([]);
@@ -12,7 +13,7 @@ const Dashboard = () => {
     const addNote = () => {
         setNewNoteEnable(!newNoteEnable);
         if (editingNote) {
-            setEditingNote(null); // Clear editing state when opening new note form
+            setEditingNote(null); 
         }
     };
 
@@ -29,6 +30,7 @@ const Dashboard = () => {
             }
         }
         setNewNoteEnable(false); // Close the new note form
+        sendNotesToBackend(); // Send updated notes to backend
     };
 
     const handleEditNote = (id) => {
@@ -39,10 +41,22 @@ const Dashboard = () => {
 
     const handleDeleteNote = (id) => {
         setNotes(notes.filter(n => n.id !== id));
+        sendNotesToBackend(); // Send updated notes to backend
     };
 
     const handleDragNote = (id, x, y) => {
         setNotes(notes.map(note => note.id === id ? { ...note, x, y } : note));
+        sendNotesToBackend(); // Send updated notes to backend
+    };
+
+    const sendNotesToBackend = async () => {
+        console.log("uncomment below post request");
+        // try {
+        //     const response = await axios.post('/api/notes', { notes });
+        //     console.log('Notes saved successfully:', response.data);
+        // } catch (error) {
+        //     console.error('Error saving notes:', error);
+        // }
     };
 
     return (
