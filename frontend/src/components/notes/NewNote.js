@@ -56,7 +56,7 @@ const NewNote = () => {
             <Typography variant="h6" gutterBottom>
                 New Note
             </Typography>
-            <FormControl fullWidth variant="outlined" sx={{ mb: 2 }}>
+            <FormControl fullWidth variant="outlined" sx={{ mb: 2 }} size="small">
                 <InputLabel>Select a group</InputLabel>
                 <Select
                     value={group}
