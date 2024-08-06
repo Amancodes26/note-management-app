@@ -16,9 +16,9 @@ const Note = ({
 
     return (
         <Draggable defaultPosition={{ x: 0, y: 0 }}>
-            <div className="note bg-[#fa9fba] border rounded-lg shadow-md w-80 min-h-[400px] max-h-[400px] overflow-auto relative font-sans ">
+            <div className="note bg-[#8AC256] w-80 h-80 rounded-[14px] shadow-2xl overflow-auto relative font-sans ">
                 <div className="flex flex-col h-full">
-                    <div className="hover:border-2 hover:rounded-lg hover:border-white border-[#fa9fba] border-2 flex">
+                    <div className="hover:border-2 hover:rounded-lg hover:border-white border-[#8AC256] border-2 flex">
                         <input
                             type="text"
                             value={title}
@@ -33,7 +33,7 @@ const Note = ({
                                 onClick={handleEditNote}></img>
                         </div>
                     </div>
-                    <div className="border-2 border-[#fa9fba] hover:border-white rounded-lg hover:opacity-90 h-full">
+                    <div className="border-2 border-[#8AC256] hover:border-white rounded-lg hover:opacity-90 h-full">
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
