@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Box,
     Button,
@@ -34,13 +34,21 @@ const ColorCircle = styled("div")(({ theme, color }) => ({
 }));
 
 const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColor = '' }) => {
-    const [group, setGroup] = useState("");
+    const [group, setGroup] = useState(initialColor); // Initialize with initialColor
     const [selectedColor, setSelectedColor] = useState(initialColor);
     const [title, setTitle] = useState(initialTitle);
     const [content, setContent] = useState(initialContent);
 
+    // Synchronize `selectedColor` and `group` if `initialColor` changes
+    useEffect(() => {
+        setGroup(initialColor);
+        setSelectedColor(initialColor);
+    }, [initialColor]);
+
     const handleChange = (event) => {
-        setGroup(event.target.value);
+        const newValue = event.target.value;
+        setGroup(newValue);
+        console.log(newValue); // Log the selected value directly
     };
 
     const handleColorSelect = (color) => {
@@ -60,6 +68,7 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
         setTitle("");
         setContent("");
         setSelectedColor("");
+        setGroup(""); // Reset state if needed
     };
 
     return (
@@ -78,11 +87,11 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
             <FormControl fullWidth variant="outlined" sx={{ mb: 2 }} size="small">
                 <InputLabel>Select a group</InputLabel>
                 <Select
-                    value={group}
+                    value={group} // Use `group` to set the selected value
                     onChange={handleChange}
                     label="Select a group">
                     {colors.map((color) => (
-                        <MenuItem key={color.name} value={color.name}>
+                        <MenuItem key={color.hex} value={color.hex}>
                             {color.name}
                         </MenuItem>
                     ))}
@@ -97,7 +106,7 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
                 size="small">
                 {colors.map((color) => (
                     <ColorCircle
-                        key={color.name}
+                        key={color.hex}
                         color={color.hex}
                         onClick={() => handleColorSelect(color.hex)}
                         style={{
