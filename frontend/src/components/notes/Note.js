@@ -19,7 +19,7 @@ const Note = ({
         <Draggable defaultPosition={{ x: 0, y: 0 }}>
             <div className="note" style={style}>
                 <div className="flex flex-col h-full ">
-                    <div className="hover:border-2 hover:border-white border-[#0000] border-2 rounded-lg flex ">
+                    <div className="hover:border-2 hover:border-white border-[#0000] border-2 rounded-lg flex font-roboto">
                         <input
                             type="text"
                             value={title}
@@ -42,7 +42,7 @@ const Note = ({
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className="w-full h-full border-none bg-transparent outline-none resize-none text-lg p-2 text-center cursor-pointer"
+                            className="w-full h-full border-none bg-transparent outline-none resize-none text-lg p-2 text-left cursor-pointer"
                         />
                     </div>
                 </div>

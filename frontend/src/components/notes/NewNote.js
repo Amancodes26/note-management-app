@@ -70,6 +70,7 @@ const NewNote = ({ onCreate }) => {
                 border: "1px solid #ccc",
                 borderRadius: 1,
                 bgcolor: selectedColor || 'white',
+                borderTopRightRadius: "15px"
             }}>
             <Typography variant="h6" gutterBottom>
                 New Note

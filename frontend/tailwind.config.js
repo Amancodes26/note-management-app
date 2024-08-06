@@ -14,6 +14,10 @@ module.exports = {
                 300: "300ms",
                 500: "500ms",
             },
+            fontFamily: {
+                roboto: ["Roboto", "sans-serif"],
+                poppins: ["Poppins", "sans-serif"],
+            },
         },
     },
     plugins: [],

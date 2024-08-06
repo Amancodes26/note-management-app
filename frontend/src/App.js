@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './components/ui/Navbar';
 import Dashboard from './components/ui/Dashboard';
+import Login from './components/ui/Login';
 
 function App() {
   return (
