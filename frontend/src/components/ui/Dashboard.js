@@ -25,7 +25,7 @@ const Dashboard = () => {
                 setEditingNote(null);
             } else {
                 // Create new note at default position (e.g., x: 50, y: 50)
-                setNotes([{ ...note, x: 50, y: 50 }, ...notes]);
+                setNotes([{ ...note, x: 50, y: 0 }, ...notes]);
                 setHighlightedNoteId(note.id);
             }
         }

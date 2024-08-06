@@ -29,35 +29,35 @@ const Note = ({
             defaultPosition={{ x: initialX, y: initialY }}
             onStop={handleDrag}>
             <div
-                className={`note cursor-pointer ${
+                className={`note cursor-pointer w-80 h-80 ${
                     isHighlighted ? "highlighted" : ""
                 }`}
                 style={{ ...style, position: 'absolute' }}>
-                <div className="flex flex-col h-full cursor-pointer">
-                    <div className="hover:border-2 hover:border-white border-[#0000] border-2 rounded-lg flex justify-between font-roboto">
-                        <IconButton onClick={() => onDelete(id)}>
+                <div className="flex flex-col h-full">
+                    {/* Header */}
+                    <div className="flex justify-between items-center border-2 border-transparent rounded-lg hover:border-white">
+                        <IconButton onClick={() => onDelete(id)} className="p-1">
                             <img
                                 src={closeCross}
                                 alt="delete"
                                 className="h-7"
                             />
                         </IconButton>
-                        <div className="text-xl font-bold border-none  p-2 text-center cursor-default inline-block">
+                        <div className="text-xl font-bold p-2 text-center cursor-default truncate">
                             {title}
                         </div>
-                        <div className="flex items-center">
-                            <IconButton onClick={() => onEdit(id)}>
-                                <img
-                                    src={editNote}
-                                    alt="edit"
-                                    className="h-7"
-                                />
-                            </IconButton>
-                        </div>
+                        <IconButton onClick={() => onEdit(id)} className="p-1">
+                            <img
+                                src={editNote}
+                                alt="edit"
+                                className="h-7"
+                            />
+                        </IconButton>
                     </div>
                     <div className="w-full h-[2px] bg-black"></div>
-                    <div className="border-2 border-[#0000] hover:border-white hover:opacity-90 h-full rounded-lg">
-                        <div className="w-full h-full border-none bg-transparent outline-none resize-none text-lg p-2 text-left">
+                    {/* Content */}
+                    <div className="flex-1 overflow-auto p-2 rounded-lg">
+                        <div className="text-lg text-left whitespace-pre-wrap">
                             {description}
                         </div>
                     </div>
