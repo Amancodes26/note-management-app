@@ -13,17 +13,3 @@
     color: black;
 }
 
-/* Optional: Add a small sticky tab effect */
-.note::after {
-    content: '';
-    position: absolute;
-    top: -10px; /* Position above the note */
-    right: 10px; /* Offset from the right edge */
-    width: 30px; /* Width of the tab */
-    height: 30px; /* Height of the tab */
-    background-color: #fa9fba; /* Match the note color */
-    border-radius: 50% 50% 0 0; /* Rounded top corners */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Shadow to make it look like it's sticking out */
-    transform: rotate(-45deg); /* Rotate to create the tab effect */
-    z-index: 1; /* Ensure it appears on top of the note */
-}
