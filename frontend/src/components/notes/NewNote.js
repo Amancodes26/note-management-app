@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Box,
     Button,
@@ -33,8 +33,8 @@ const ColorCircle = styled("div")(({ theme, color }) => ({
 }));
 
 const NewNote = () => {
-    const [group, setGroup] = React.useState("");
-    const [selectedColor, setSelectedColor] = React.useState("");
+    const [group, setGroup] = useState("");
+    const [selectedColor, setSelectedColor] = useState("");
 
     const handleChange = (event) => {
         setGroup(event.target.value);
@@ -51,7 +51,7 @@ const NewNote = () => {
                 p: 2,
                 border: "1px solid #ccc",
                 borderRadius: 1,
-                bgcolor: "rgba(255, 255, 255)"
+                bgcolor: selectedColor || 'white', // Use selectedColor or default to white
             }}>
             <Typography variant="h6" gutterBottom>
                 New Note
@@ -74,7 +74,8 @@ const NewNote = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     mb: 2,
-                }}>
+                }}
+                size="small">
                 {colors.map((color) => (
                     <ColorCircle
                         key={color.name}
