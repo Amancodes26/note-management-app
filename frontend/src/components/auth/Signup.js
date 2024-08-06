@@ -21,7 +21,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
     textAlign: "center",
 }));
 
-const StyledForm = styled('form')(({ theme }) => ({
+const StyledForm = styled("form")(({ theme }) => ({
     width: "100%",
     marginTop: theme.spacing(1),
 }));
@@ -30,18 +30,17 @@ const SubmitButton = styled(Button)(({ theme }) => ({
     margin: theme.spacing(3, 0, 2),
 }));
 
-const Login = () => {
-
+const Signup = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Handle sign-in logic
+        // Handle sign-up logic
     };
 
     return (
         <Container component="main" maxWidth="xs">
             <StyledPaper elevation={3}>
                 <Typography variant="h5" gutterBottom>
-                    Sign In
+                    Sign Up
                 </Typography>
                 <StyledForm noValidate onSubmit={handleSubmit}>
                     <TextField
@@ -64,18 +63,30 @@ const Login = () => {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
+                        autoComplete="new-password"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        type="password"
+                        id="confirmPassword"
+                        autoComplete="new-password"
                     />
                     <SubmitButton
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary">
-                        Sign In
+                        Sign Up
                     </SubmitButton>
                     <Box mt={2}>
                         <Typography variant="body2">
-                            Don't have an account? <a href="/signup">Sign Up</a>
+                            Already have an account?{" "}
+                            <a href="/login">Sign In</a>
                         </Typography>
                     </Box>
                 </StyledForm>
@@ -84,4 +95,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;
