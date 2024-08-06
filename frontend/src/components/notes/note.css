@@ -1,15 +1,16 @@
 .note {
-    background-color: #fef9c3; /* Light yellow to mimic paper */
-    border: 1px solid #f9e3a1; /* Slightly darker border for a paper edge effect */
+    background-color: #fa9fba; 
+    border: 1px solid ; /* Slightly darker border for a paper edge effect */
     border-radius: 8px; /* Rounded corners for a softer look */
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow to give a lifted appearance */
-    padding: 16px; /* Space inside the note */
-    width: 300px; /* Fixed width for a sticky note */
-    min-height: 400px; /* Minimum height to ensure there's enough space for text */
-    max-height: 400px; /* Maximum height to keep it from growing too large */
+    width: 250px; /* Fixed width for a sticky note */
+    min-height: 300px; /* Minimum height to ensure there's enough space for text */
+    max-height: 300px; /* Maximum height to keep it from growing too large */
     overflow: auto; /* Allows scrolling if the content overflows */
     position: relative; /* Position relative for the 'sticky' effect */
     font-family: 'Arial', sans-serif; /* Font to make it look more like a note */
+    overflow: hidden;
+    color: black;
 }
 
 /* Optional: Add a small sticky tab effect */
@@ -20,8 +21,7 @@
     right: 10px; /* Offset from the right edge */
     width: 30px; /* Width of the tab */
     height: 30px; /* Height of the tab */
-    background-color: #fef9c3; /* Match the note color */
-    border: 1px solid #f9e3a1; /* Border to match the note edge */
+    background-color: #fa9fba; /* Match the note color */
     border-radius: 50% 50% 0 0; /* Rounded top corners */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Shadow to make it look like it's sticking out */
     transform: rotate(-45deg); /* Rotate to create the tab effect */

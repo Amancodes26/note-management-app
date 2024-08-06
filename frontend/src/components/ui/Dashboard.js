@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Note from '../notes/Note';
+import newNote from '../../utils/icons/new-note.svg';
+
 
 const Dashboard = () => {
     const [notes, setNotes] = useState([]);
@@ -11,19 +13,21 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="bg-gray-700 w-full min-h-[calc(100vh-64px)] max-w-[100vw] overflow-x-hidden">
-            <p className="text-gray-200">Sticky Notes</p>
-            <button 
-                type="button" 
-                className="text-white bg-gray-900 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-[40%] text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-700 dark:border-gray-700" 
-                onClick={addNote}
-            >
-                +
-            </button>
-            <div className='flex gap-2 flex-wrap'>
-                {notes.map(note => (
-                    <Note key={note.id} content={note.content} />
-                ))}
+        <div className="bg-gray-700 min-h-[calc(100vh-64px)] max-w-[100vw] overflow-x-hidden relative flex flex-col items-center">
+            <p className="text-gray-200 text-5xl py-4">Sticky Notes</p>
+            <div className='flex w-10/12 justify-center'>
+                <div className='flex gap-2 flex-wrap'>
+                    {notes.map(note => (
+                        <Note key={note.id} content={note.content} />
+                    ))}
+                </div>
+                <div 
+                    type="button" 
+                    className=" fixed right-5" 
+                    onClick={addNote}
+                >
+                    <img src={newNote} alt="New Note" className="w-8 h-8 hover:opacity-50" />
+                </div>
             </div>
         </div>
     );
