@@ -20,11 +20,11 @@ const Dashboard = () => {
         if (note) {
             if (editingNote) {
                 // Update existing note
-                setNotes(notes.map(n => n.id === editingNote.id ? note : n));
+                setNotes(notes.map(n => n.id === editingNote.id ? { ...note, x: editingNote.x, y: editingNote.y } : n));
                 setEditingNote(null);
             } else {
-                // Create new note
-                setNotes([note, ...notes]);
+                // Create new note at default position (e.g., x: 50, y: 50)
+                setNotes([{ ...note, x: 50, y: 50 }, ...notes]);
                 setHighlightedNoteId(note.id);
             }
         }
@@ -41,24 +41,29 @@ const Dashboard = () => {
         setNotes(notes.filter(n => n.id !== id));
     };
 
+    const handleDragNote = (id, x, y) => {
+        setNotes(notes.map(note => note.id === id ? { ...note, x, y } : note));
+    };
+
     return (
         <div className="bg-gray-700 min-h-[calc(100vh-64px)] max-w-[100vw] overflow-x-hidden relative flex flex-col items-center">
             <p className="text-gray-200 text-5xl py-4 font-bold">Sticky Notes</p>
-            <div className="flex w-10/12 justify-start">
-                <div className="flex gap-2 flex-wrap">
-                    {notes.map((note) => (
-                        <Note
-                            key={note.id}
-                            id={note.id} // Pass the note id to Note component
-                            initialTitle={note.title}
-                            initialDescription={note.content}
-                            style={{ backgroundColor: note.color }}
-                            isHighlighted={note.id === highlightedNoteId} // Pass highlight status
-                            onEdit={handleEditNote} // Handle edit
-                            onDelete={handleDeleteNote} // Handle delete
-                        />
-                    ))}
-                </div>
+            <div className="relative w-full h-full">
+                {notes.map((note) => (
+                    <Note
+                        key={note.id}
+                        id={note.id} // Pass the note id to Note component
+                        initialTitle={note.title}
+                        initialDescription={note.content}
+                        initialX={note.x}
+                        initialY={note.y}
+                        style={{ backgroundColor: note.color }}
+                        isHighlighted={note.id === highlightedNoteId} // Pass highlight status
+                        onEdit={handleEditNote} // Handle edit
+                        onDelete={handleDeleteNote} // Handle delete
+                        onDrag={handleDragNote} // Handle drag
+                    />
+                ))}
                 <div className="fixed right-5">
                     <div
                         type="button"

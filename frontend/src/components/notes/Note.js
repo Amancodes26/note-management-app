@@ -10,20 +10,29 @@ const Note = ({
     initialTitle = "Untitled",
     initialDescription = "No description",
     style = {},
+    initialX = 0,
+    initialY = 0,
     isHighlighted = false,
     onEdit,
     onDelete,
+    onDrag,
 }) => {
     const [title] = useState(initialTitle); // Title is now read-only
     const [description] = useState(initialDescription); // Description is now read-only
 
+    const handleDrag = (e, data) => {
+        onDrag(id, data.x, data.y);
+    };
+
     return (
-        <Draggable defaultPosition={{ x: 0, y: 0 }}>
+        <Draggable
+            defaultPosition={{ x: initialX, y: initialY }}
+            onStop={handleDrag}>
             <div
                 className={`note cursor-pointer ${
                     isHighlighted ? "highlighted" : ""
                 }`}
-                style={style}>
+                style={{ ...style, position: 'absolute' }}>
                 <div className="flex flex-col h-full cursor-pointer">
                     <div className="hover:border-2 hover:border-white border-[#0000] border-2 rounded-lg flex justify-between font-roboto">
                         <IconButton onClick={() => onDelete(id)}>
