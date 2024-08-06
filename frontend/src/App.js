@@ -4,7 +4,7 @@ import Dashboard from './components/ui/Dashboard';
 
 function App() {
   return (
-    <div className="App text-center font-bold text-3xl h-svh">
+    <div className="App text-center text-3xl h-svh">
         <Navbar />
         <Dashboard />
     </div>

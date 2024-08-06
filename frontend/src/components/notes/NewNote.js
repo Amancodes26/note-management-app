@@ -10,6 +10,7 @@ import {
     Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { v4 as uuidv4 } from 'uuid';
 
 const colors = [
     { name: "Pink", hex: "#fa9fba" },
@@ -32,9 +33,11 @@ const ColorCircle = styled("div")(({ theme, color }) => ({
     },
 }));
 
-const NewNote = () => {
+const NewNote = ({ onCreate }) => {
     const [group, setGroup] = useState("");
     const [selectedColor, setSelectedColor] = useState("");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
     const handleChange = (event) => {
         setGroup(event.target.value);
@@ -44,6 +47,21 @@ const NewNote = () => {
         setSelectedColor(color);
     };
 
+    const handleCreateNote = () => {
+        if (!title || !content) return;
+
+        onCreate({
+            id: uuidv4(),
+            title,
+            content,
+            color: selectedColor || 'white',
+        });
+
+        setTitle("");
+        setContent("");
+        setSelectedColor("");
+    };
+
     return (
         <Box
             sx={{
@@ -51,7 +69,7 @@ const NewNote = () => {
                 p: 2,
                 border: "1px solid #ccc",
                 borderRadius: 1,
-                bgcolor: selectedColor || 'white', // Use selectedColor or default to white
+                bgcolor: selectedColor || 'white',
             }}>
             <Typography variant="h6" gutterBottom>
                 New Note
@@ -94,6 +112,8 @@ const NewNote = () => {
                 fullWidth
                 label="Title"
                 variant="outlined"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 sx={{ mb: 2 }}
             />
             <TextField
@@ -102,11 +122,13 @@ const NewNote = () => {
                 multiline
                 rows={4}
                 variant="outlined"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
                 sx={{ mb: 2 }}
             />
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Button variant="outlined">Cancel</Button>
-                <Button variant="contained" color="primary">
+                <Button variant="outlined" onClick={() => onCreate(null)}>Cancel</Button>
+                <Button variant="contained" color="primary" onClick={handleCreateNote}>
                     Create
                 </Button>
             </Box>
