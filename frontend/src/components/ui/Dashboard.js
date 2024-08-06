@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Note from '../notes/Note';
 import newNote from '../../utils/icons/new-note.svg';
 
-
 const Dashboard = () => {
     const [notes, setNotes] = useState([]);
     const [nextId, setNextId] = useState(1); // Add an ID counter
