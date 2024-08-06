@@ -8,6 +8,7 @@ import {
     Paper,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
 
 // Define custom styles using styled API
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -86,7 +87,7 @@ const Signup = () => {
                     <Box mt={2}>
                         <Typography variant="body2">
                             Already have an account?{" "}
-                            <a href="/login">Sign In</a>
+                            <Link to="/login">Sign In</Link>
                         </Typography>
                     </Box>
                 </StyledForm>

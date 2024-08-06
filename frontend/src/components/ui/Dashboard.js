@@ -40,7 +40,7 @@ const Dashboard = () => {
                         <img
                             src={newNote}
                             alt="New Note"
-                            className={`w-8 h-8 hover:opacity-50 transition-all ${newNoteEnable ? 'rotate-45' : ''}`}
+                            className={`w-8 h-8 hover:opacity-50 transition-all cursor-pointer ${newNoteEnable ? 'rotate-45' : ''}`}
                         />
                     </div>
                     {newNoteEnable && <NewNote onCreate={handleCreateNote} />}
