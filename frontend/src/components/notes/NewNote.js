@@ -33,11 +33,11 @@ const ColorCircle = styled("div")(({ theme, color }) => ({
     },
 }));
 
-const NewNote = ({ onCreate }) => {
+const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColor = '' }) => {
     const [group, setGroup] = useState("");
-    const [selectedColor, setSelectedColor] = useState("");
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [selectedColor, setSelectedColor] = useState(initialColor);
+    const [title, setTitle] = useState(initialTitle);
+    const [content, setContent] = useState(initialContent);
 
     const handleChange = (event) => {
         setGroup(event.target.value);
@@ -73,7 +73,7 @@ const NewNote = ({ onCreate }) => {
                 borderTopRightRadius: "15px"
             }}>
             <Typography variant="h6" gutterBottom>
-                New Note
+                {initialTitle ? 'Edit Note' : 'New Note'}
             </Typography>
             <FormControl fullWidth variant="outlined" sx={{ mb: 2 }} size="small">
                 <InputLabel>Select a group</InputLabel>
@@ -130,7 +130,7 @@ const NewNote = ({ onCreate }) => {
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Button variant="outlined" onClick={() => onCreate(null)}>Cancel</Button>
                 <Button variant="contained" color="primary" onClick={handleCreateNote}>
-                    Create
+                    {initialTitle ? 'Update' : 'Create'}
                 </Button>
             </Box>
         </Box>

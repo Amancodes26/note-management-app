@@ -7,18 +7,38 @@ const Dashboard = () => {
     const [notes, setNotes] = useState([]);
     const [newNoteEnable, setNewNoteEnable] = useState(false);
     const [highlightedNoteId, setHighlightedNoteId] = useState(null);
+    const [editingNote, setEditingNote] = useState(null);
 
     const addNote = () => {
         setNewNoteEnable(!newNoteEnable);
+        if (editingNote) {
+            setEditingNote(null); // Clear editing state when opening new note form
+        }
     };
 
-    const handleCreateNote = (note) => {
+    const handleCreateOrUpdateNote = (note) => {
         if (note) {
-            const newNote = { ...note, id: Date.now() }; // Use a timestamp or UUID for unique id
-            setNotes([newNote, ...notes]);
-            setHighlightedNoteId(newNote.id);
+            if (editingNote) {
+                // Update existing note
+                setNotes(notes.map(n => n.id === editingNote.id ? note : n));
+                setEditingNote(null);
+            } else {
+                // Create new note
+                setNotes([note, ...notes]);
+                setHighlightedNoteId(note.id);
+            }
         }
         setNewNoteEnable(false); // Close the new note form
+    };
+
+    const handleEditNote = (id) => {
+        const noteToEdit = notes.find(n => n.id === id);
+        setEditingNote(noteToEdit);
+        setNewNoteEnable(true); // Open new note form
+    };
+
+    const handleDeleteNote = (id) => {
+        setNotes(notes.filter(n => n.id !== id));
     };
 
     return (
@@ -34,6 +54,8 @@ const Dashboard = () => {
                             initialDescription={note.content}
                             style={{ backgroundColor: note.color }}
                             isHighlighted={note.id === highlightedNoteId} // Pass highlight status
+                            onEdit={handleEditNote} // Handle edit
+                            onDelete={handleDeleteNote} // Handle delete
                         />
                     ))}
                 </div>
@@ -48,7 +70,14 @@ const Dashboard = () => {
                             className={`w-8 h-8 hover:opacity-50 transition-all cursor-pointer ${newNoteEnable ? 'rotate-45' : ''}`}
                         />
                     </div>
-                    {newNoteEnable && <NewNote onCreate={handleCreateNote} />}
+                    {newNoteEnable && 
+                        <NewNote 
+                            onCreate={handleCreateOrUpdateNote}
+                            initialTitle={editingNote ? editingNote.title : ''}
+                            initialContent={editingNote ? editingNote.content : ''}
+                            initialColor={editingNote ? editingNote.color : ''}
+                        />
+                    }
                 </div>
             </div>
         </div>
