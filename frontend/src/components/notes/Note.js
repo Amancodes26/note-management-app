@@ -4,20 +4,22 @@ import "./note.css";
 import editNote from "../../utils/icons/edit-note.svg";
 
 const Note = ({
+    id,
     initialTitle = "Untitled",
     initialDescription = "No description",
     style = {},
+    isHighlighted = false,
 }) => {
     const [title, setTitle] = useState(initialTitle);
     const [description, setDescription] = useState(initialDescription);
-    
+
     const handleEditNote = () => {
         console.log("Edit note");
     };
 
     return (
         <Draggable defaultPosition={{ x: 0, y: 0 }}>
-            <div className="note" style={style}>
+            <div className={`note ${isHighlighted ? 'highlighted' : ''}`} style={style}>
                 <div className="flex flex-col h-full ">
                     <div className="hover:border-2 hover:border-white border-[#0000] border-2 rounded-lg flex font-roboto">
                         <input
@@ -35,9 +37,7 @@ const Note = ({
                             />
                         </div>
                     </div>
-                    <div className="w-full h-[2px] bg-black">
-
-                    </div>
+                    <div className="w-full h-[2px] bg-black"></div>
                     <div className="border-2 border-[#0000] hover:border-white hover:opacity-90 h-full rounded-lg">
                         <textarea
                             value={description}

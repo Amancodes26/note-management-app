@@ -6,6 +6,7 @@ import NewNote from "../notes/NewNote";
 const Dashboard = () => {
     const [notes, setNotes] = useState([]);
     const [newNoteEnable, setNewNoteEnable] = useState(false);
+    const [highlightedNoteId, setHighlightedNoteId] = useState(null);
 
     const addNote = () => {
         setNewNoteEnable(!newNoteEnable);
@@ -13,7 +14,9 @@ const Dashboard = () => {
 
     const handleCreateNote = (note) => {
         if (note) {
-            setNotes([...notes, note]);
+            const newNote = { ...note, id: Date.now() }; // Use a timestamp or UUID for unique id
+            setNotes([newNote, ...notes]);
+            setHighlightedNoteId(newNote.id);
         }
         setNewNoteEnable(false); // Close the new note form
     };
@@ -26,9 +29,11 @@ const Dashboard = () => {
                     {notes.map((note) => (
                         <Note
                             key={note.id}
+                            id={note.id} // Pass the note id to Note component
                             initialTitle={note.title}
                             initialDescription={note.content}
                             style={{ backgroundColor: note.color }}
+                            isHighlighted={note.id === highlightedNoteId} // Pass highlight status
                         />
                     ))}
                 </div>

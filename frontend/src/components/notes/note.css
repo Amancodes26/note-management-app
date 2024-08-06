@@ -13,3 +13,27 @@
     color: black;
 }
 
+/* Add this to your note.css file */
+
+@keyframes highlight {
+    0% {
+        scale: 0;
+    }
+    25% {
+        scale: 0.5;
+    }
+    50% {
+        scale: 1;
+
+    }
+    75% {
+        scale: 1.2;
+    }
+    100% {
+        scale: 1;
+    }
+}
+
+.note.highlighted {
+    animation: highlight 200ms ease-in-out;
+}
