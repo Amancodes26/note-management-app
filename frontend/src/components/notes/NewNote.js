@@ -12,7 +12,6 @@ import {
 import { styled } from "@mui/system";
 import { v4 as uuidv4 } from 'uuid';
 
-
 const colors = [
     { name: "Pink", hex: "#fa9fba" },
     { name: "Green", hex: "#8AC256" },
@@ -66,10 +65,11 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
             color: selectedColor || 'white',
         };
 
-        fetch('/api/notes', {
+        fetch('http://localhost:5000/api/notes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem('token'), // Add token to headers
             },
             body: JSON.stringify(newNote),
         })
