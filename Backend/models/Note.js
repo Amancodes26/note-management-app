@@ -16,20 +16,7 @@ const NoteSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
-      },
-    
-    position: {
-    x: {
-          type: Number,
-          required: true
     },
-    y: {
-          type: Number,
-          required: true
-       }
-    },
-   
-    
     date: {
         type: Date,
         default: Date.now

@@ -49,10 +49,10 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
         if (!title || !content) return;
 
         const newNote = {
-            id: uuidv4(),
-            title,
-            content,
             color: selectedColor || 'white',
+            content,
+            id: uuidv4(),
+            title
         };
 
         fetch('http://localhost:5000/api/notes', {
