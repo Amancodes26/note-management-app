@@ -79,7 +79,7 @@ const Dashboard = () => {
         : notes;
 
     return (
-        <div className="bg-gray-700 min-h-[calc(100vh-64px)] max-w-[100vw] overflow-x-auto relative flex flex-col items-center">
+        <div className="bg-gray-700 h-full max-w-[100vw] overflow-x-auto relative flex flex-col items-center">
             <p className="text-gray-200 text-5xl py-4 font-bold">Sticky Notes</p>
 
             {/* Color Filter UI */}
