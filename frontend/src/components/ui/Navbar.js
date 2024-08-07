@@ -64,49 +64,50 @@ export default function Navbar() {
                             </div>
                             {loggedIn ? (
                                 <MenuItems
-                                    transition
-                                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition-transform transform-gpu duration-200 ease-out">
-                                    <MenuItem>
-                                        <a
-                                            href="/"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200 last:border-b-0">
-                                            Your Profile
-                                        </a>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <a
-                                            href="/"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200 last:border-b-0">
-                                            Settings
-                                        </a>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <a
-                                            href="/"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200 last:border-b-0">
-                                            Sign out
-                                        </a>
-                                    </MenuItem>
-                                </MenuItems>
+                                transition
+                                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition-transform transform-gpu duration-200 ease-out">
+                                <MenuItem>
+                                    <a
+                                        href="/"
+                                        className="block px-4 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
+                                        Your Profile
+                                    </a>
+                                </MenuItem>
+                                <MenuItem>
+                                    <a
+                                        href="/"
+                                        className="block px-4 py-2 text-base text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
+                                        Settings
+                                    </a>
+                                </MenuItem>
+                                <MenuItem>
+                                    <a
+                                        href="/"
+                                        className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
+                                        Sign out
+                                    </a>
+                                </MenuItem>
+                            </MenuItems>
                             ) : (
-                                <MenuItems
-                                    transition
-                                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition-transform transform-gpu duration-200 ease-out">
-                                    <MenuItem>
-                                        <Link
-                                            to="/login"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200 last:border-b-0">
-                                            Login
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <Link
-                                            to="/signup"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200 last:border-b-0">
-                                            Signup
-                                        </Link>
-                                    </MenuItem>
-                                </MenuItems>
+                            <MenuItems
+                                transition
+                                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition-transform transform-gpu duration-200 ease-out">
+                                <MenuItem>
+                                    <Link
+                                        to="/login"
+                                        className="block px-2 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
+                                        Login
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link
+                                        to="/signup"
+                                        className="block px-2 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
+                                        Signup
+                                    </Link>
+                                </MenuItem>
+                            </MenuItems>
+                            
                             )}
                         </Menu>
                     </div>
