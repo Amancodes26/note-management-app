@@ -38,12 +38,12 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         const userCredentials = {
             email,
             password,
         };
-
+    
         try {
             const response = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
@@ -52,17 +52,18 @@ const Login = () => {
                 },
                 body: JSON.stringify(userCredentials),
             });
-
+    
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
             }
-
+    
             const data = await response.json();
             console.log('Success:', data);
-           
-            // store token in localStorage and navigate to another page
+    
+            // Store token in localStorage and navigate
             localStorage.setItem('token', data.token);
+            console.log('Token stored:', localStorage.getItem('token'));
             navigate('/'); // Redirect to a protected page
         } catch (error) {
             console.error('Error:', error.message);

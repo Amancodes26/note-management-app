@@ -1,22 +1,35 @@
 const mongoose = require('mongoose');
 
 const NoteSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    group: {
-        type: String,
-        required: true
-    },
-    text: {
-        type: String,
-        required: true
-    },
     color: {
         type: String,
         required: true
     },
+    content: {
+        type: String,
+        required: true
+    },
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    title: {
+        type: String,
+        required: true
+      },
+    
+    position: {
+    x: {
+          type: Number,
+          required: true
+    },
+    y: {
+          type: Number,
+          required: true
+       }
+    },
+   
+    
     date: {
         type: Date,
         default: Date.now
