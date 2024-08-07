@@ -76,14 +76,14 @@ export default function Navbar() {
                                 <MenuItem>
                                     <a
                                         href="/"
-                                        className="block px-4 py-2 text-base text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
+                                        className="block px-4 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
                                         Settings
                                     </a>
                                 </MenuItem>
                                 <MenuItem>
                                     <a
                                         href="/"
-                                        className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
+                                        className="block px-4 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
                                         Sign out
                                     </a>
                                 </MenuItem>
