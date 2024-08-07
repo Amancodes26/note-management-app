@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 import userProfile from "../../utils/icons/user-profile.svg";
 
 export default function Navbar() {
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn')==='true');
 
     useEffect(() => {
-        setLoggedIn(localStorage.getItem("loggedIn"));
-    }, [])
+        setLoggedIn(localStorage.getItem("loggedIn")==='true');
+    }, [setLoggedIn])
 
     return (
         <nav className="bg-gray-800 max-h-[64px]">
@@ -22,7 +22,7 @@ export default function Navbar() {
                 <div className="relative flex h-16 items-center justify-between">
                     {/* Left side: Sticky Note Icon */}
                     <div className="flex items-center">
-                        <Link to="/">
+                        <Link to="/dashboard">
                             <img
                                 alt="Your Company"
                                 src={stickyNoteIcon}
@@ -34,7 +34,7 @@ export default function Navbar() {
                     {/* Center: Dashboard Link */}
                     <div className="flex flex-1 items-center justify-center">
                         <Link
-                            to="/"
+                            to="/dashboard"
                             aria-current="page"
                             className="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium">
                             Dashboard
@@ -67,25 +67,25 @@ export default function Navbar() {
                                 transition
                                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition-transform transform-gpu duration-200 ease-out">
                                 <MenuItem>
-                                    <a
-                                        href="/"
+                                    <Link
+                                        to="/dashboard"
                                         className="block px-4 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
                                         Your Profile
-                                    </a>
+                                    </Link>
                                 </MenuItem>
                                 <MenuItem>
-                                    <a
-                                        href="/"
+                                    <Link
+                                        to="/dashboard"
                                         className="block px-4 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
                                         Settings
-                                    </a>
+                                    </Link>
                                 </MenuItem>
-                                <MenuItem>
-                                    <a
-                                        href="/"
+                                <MenuItem onClick={() => localStorage.setItem('loggedIn', 'false')}>
+                                    <Link
+                                        to="/"
                                         className="block px-4 py-2 text-lg text-gray-100 hover:bg-gray-600 border-b border-gray-600 last:border-b-0">
                                         Sign out
-                                    </a>
+                                    </Link>
                                 </MenuItem>
                             </MenuItems>
                             ) : (
