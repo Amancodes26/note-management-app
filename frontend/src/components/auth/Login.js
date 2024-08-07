@@ -39,49 +39,51 @@ const Login = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
-            <StyledPaper elevation={3}>
-                <Typography variant="h5" gutterBottom>
-                    Log In
-                </Typography>
-                <StyledForm noValidate onSubmit={handleSubmit}>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <SubmitButton
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary">
+        <div>
+            <Container component="main" maxWidth="xs">
+                <StyledPaper elevation={3}>
+                    <Typography variant="h5" gutterBottom>
                         Log In
-                    </SubmitButton>
-                    <Box mt={2}>
-                        <Typography variant="body2">
-                            Don't have an account? <Link to="/signup">Sign Up</Link>
-                        </Typography>
-                    </Box>
-                </StyledForm>
-            </StyledPaper>
-        </Container>
+                    </Typography>
+                    <StyledForm noValidate onSubmit={handleSubmit}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <SubmitButton
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary">
+                            Log In
+                        </SubmitButton>
+                        <Box mt={2}>
+                            <Typography variant="body2">
+                                Don't have an account? <Link to="/signup">Sign Up</Link>
+                            </Typography>
+                        </Box>
+                    </StyledForm>
+                </StyledPaper>
+            </Container>
+        </div>
     );
 };
 
