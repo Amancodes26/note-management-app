@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Container,
     TextField,
@@ -8,7 +8,7 @@ import {
     Paper,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Define custom styles using styled API
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -32,10 +32,41 @@ const SubmitButton = styled(Button)(({ theme }) => ({
 }));
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Handle sign-in logic
+
+        const userCredentials = {
+            email,
+            password,
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userCredentials),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+            }
+
+            const data = await response.json();
+            console.log('Success:', data);
+           
+            // store token in localStorage and navigate to another page
+            localStorage.setItem('token', data.token);
+            navigate('/'); // Redirect to a protected page
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
     };
 
     return (
@@ -57,6 +88,8 @@ const Login = () => {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <TextField
                             variant="outlined"
@@ -68,6 +101,8 @@ const Login = () => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <SubmitButton
                             type="submit"
