@@ -68,6 +68,7 @@ const Signup = () => {
 
             const data = await response.json();
             console.log('Success:', data);
+            localStorage.setItem("loggedIn", "true");
             // Redirect to login page or home page
             navigate('/dashboard');
         } catch (error) {
