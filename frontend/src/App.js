@@ -14,17 +14,23 @@ const darkTheme = createTheme({
 });
 
 function App() {
-    const loggedIn = localStorage.getItem("loggedIn");
     return (
         <Router>
             <ThemeProvider theme={darkTheme}>
                 <div className="App text-center text-3xl h-svh">
-                    { loggedIn==='true' && <Navbar />}
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<Signup />} />
+                        <Route 
+                            path="/dashboard" 
+                            element={
+                                <>
+                                    <Navbar />
+                                    <Dashboard />
+                                </>
+                            } 
+                        />
                     </Routes>
                 </div>
             </ThemeProvider>
