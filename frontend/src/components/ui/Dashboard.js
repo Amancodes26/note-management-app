@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Note from "../notes/Note";
 import newNote from "../../utils/icons/new-note.svg";
 import NewNote from "../notes/NewNote";
 import Button from '@mui/material/Button';
-// import axios from 'axios';
-// import { useEffect } from "react";
+import axios from 'axios';
 
 const colorOptions = ['#fa9fba', '#8AC256', '#97d2fb', '#fd9873', '#B89CC8'];
 
@@ -13,22 +12,26 @@ const Dashboard = () => {
     const [newNoteEnable, setNewNoteEnable] = useState(false);
     const [highlightedNoteId, setHighlightedNoteId] = useState(null);
     const [editingNote, setEditingNote] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(''); // State for selected color
+    const [selectedColor, setSelectedColor] = useState('');
 
-    // useEffect(() => {
-    //     // Send notes to backend whenever `notes` state changes
-    //     const sendNotesToBackend = async () => {
-    //         console.log("Sending notes to backend:", notes);
-    //         try {
-    //             const response = await axios.post('/api/notes', { notes });
-    //             console.log('Notes saved successfully:', response.data);
-    //         } catch (error) {
-    //             console.error('Error saving notes:', error);
-    //         }
-    //     };
+    useEffect(() => {
+        // Fetch notes from backend
+        const fetchNotes = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://localhost:5000/api/notes', {
+                    headers: {
+                        'x-auth-token': token,
+                    },
+                });
+                setNotes(response.data);
+            } catch (error) {
+                console.error('Error fetching notes:', error);
+            }
+        };
 
-    //     sendNotesToBackend();
-    // }, [notes]); // Dependency array: run effect when `notes` changes
+        fetchNotes();
+    }, []);
 
     const addNote = () => {
         setNewNoteEnable(!newNoteEnable);
@@ -40,28 +43,38 @@ const Dashboard = () => {
     const handleCreateOrUpdateNote = (note) => {
         if (note) {
             if (editingNote) {
-                setNotes(notes.map(n => n.id === editingNote.id ? { ...note, x: editingNote.x, y: editingNote.y } : n));
+                setNotes(notes.map(n => n._id === editingNote._id ? { ...note, x: editingNote.x, y: editingNote.y } : n));
                 setEditingNote(null);
             } else {
                 setNotes([{ ...note, x: 50, y: 0 }, ...notes]);
-                setHighlightedNoteId(note.id);
+                setHighlightedNoteId(note._id);
             }
         }
         setNewNoteEnable(false); 
     };
 
     const handleEditNote = (id) => {
-        const noteToEdit = notes.find(n => n.id === id);
+        const noteToEdit = notes.find(n => n._id === id);
         setEditingNote(noteToEdit);
         setNewNoteEnable(true); 
     };
 
-    const handleDeleteNote = (id) => {
-        setNotes(notes.filter(n => n.id !== id));
+    const handleDeleteNote = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            await axios.delete(`http://localhost:5000/api/notes/${id}`, {
+                headers: {
+                    'x-auth-token': token,
+                },
+            });
+            setNotes(notes.filter(n => n._id !== id));
+        } catch (error) {
+            console.error('Error deleting note:', error);
+        }
     };
 
     const handleDragNote = (id, x, y) => {
-        setNotes(notes.map(note => note.id === id ? { ...note, x, y } : note));
+        setNotes(notes.map(note => note._id === id ? { ...note, x, y } : note));
     };
 
     const handleColorFilter = (color) => {
@@ -110,14 +123,14 @@ const Dashboard = () => {
             <div className="relative w-full h-full">
                 {filteredNotes.map((note) => (
                     <Note
-                        key={note.id}
-                        id={note.id}
+                        key={note._id}
+                        id={note._id}
                         initialTitle={note.title}
                         initialDescription={note.content}
                         initialX={note.x}
                         initialY={note.y}
                         style={{ backgroundColor: note.color }}
-                        isHighlighted={note.id === highlightedNoteId}
+                        isHighlighted={note._id === highlightedNoteId}
                         onEdit={handleEditNote}
                         onDelete={handleDeleteNote}
                         onDrag={handleDragNote}
