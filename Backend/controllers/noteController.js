@@ -2,14 +2,13 @@ const Note = require('../models/Note');
 
 // Create a new note
 exports.createNote = async (req, res) => {
-    const { color, content, title, position, date } = req.body;
+    const { color, content, title, date } = req.body;
     try {
         const newNote = new Note({
             color,
             content,
             id: req.user.id,  // Make sure this is the correct user ID field
             title,
-            position,
             date
         });
         const savedNote = await newNote.save();
@@ -31,7 +30,7 @@ exports.getNotes = async (req, res) => {
 
 // Update a note
 exports.updateNote = async (req, res) => {
-    const { color, content, title, position, date } = req.body;
+    const { color, content, title, date } = req.body;
     try {
         const note = await Note.findById(req.params.id);
         if (!note) {
@@ -44,7 +43,6 @@ exports.updateNote = async (req, res) => {
         note.color = color || note.color;
         note.content = content || note.content;
         note.title = title || note.title;
-        note.position = position || note.position;
         note.date = date || note.date;
 
         const updatedNote = await note.save();
