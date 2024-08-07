@@ -42,9 +42,10 @@ const Login = () => {
         <div className="bg-[#121212] h-full">
             <Container component="main" maxWidth="xs">
                 <StyledPaper elevation={3}>
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
                         Log In
                     </Typography>
+
                     <StyledForm noValidate onSubmit={handleSubmit}>
                         <TextField
                             variant="outlined"

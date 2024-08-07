@@ -41,7 +41,7 @@ const Signup = () => {
         <div className="bg-[#121212] h-full">
             <Container component="main" maxWidth="xs">
                 <StyledPaper elevation={3}>
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
                         Sign Up
                     </Typography>
                     <StyledForm noValidate onSubmit={handleSubmit}>
