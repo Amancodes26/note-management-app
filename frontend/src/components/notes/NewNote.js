@@ -29,7 +29,7 @@ const ColorCircle = styled("div")(({ theme, color }) => ({
     margin: theme.spacing(0.5),
     border: `2px solid ${color}`,
     "&:hover": {
-        border: `2px solid black`,
+        border: `2px solid white`, // Lighter border on hover
     },
 }));
 
@@ -92,20 +92,21 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
             sx={{
                 width: 300,
                 p: 2,
-                border: "1px solid #ccc",
+                border: "1px solid #444", // Darker border for dark mode
                 borderRadius: 1,
-                bgcolor: selectedColor || 'white',
+                bgcolor: '#333', // Dark mode background color
                 borderTopRightRadius: "15px"
             }}>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" gutterBottom sx={{ color: 'white' }}>
                 {initialTitle ? 'Edit Note' : 'New Note'}
             </Typography>
             <FormControl fullWidth variant="outlined" sx={{ mb: 2 }} size="small">
-                <InputLabel>Select a group</InputLabel>
+                <InputLabel sx={{ color: 'white' }}>Select a group</InputLabel>
                 <Select
                     value={group} // Use `group` to set the selected value
                     onChange={handleChange}
-                    label="Select a group">
+                    label="Select a group"
+                    sx={{ bgcolor: '#444', color: 'white' }}>
                     {colors.map((color) => (
                         <MenuItem key={color.hex} value={color.hex}>
                             {color.name}
@@ -128,7 +129,7 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
                         style={{
                             border:
                                 selectedColor === color.hex
-                                    ? "2px solid black"
+                                    ? "2px solid white"
                                     : `2px solid ${color.hex}`,
                         }}
                     />
@@ -140,7 +141,7 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
                 variant="outlined"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                sx={{ mb: 2 }}
+                sx={{ mb: 2, bgcolor: '#444', input: { color: 'white' }, label: { color: 'white' } }}
             />
             <TextField
                 fullWidth
@@ -150,10 +151,12 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
                 variant="outlined"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                sx={{ mb: 2 }}
+                sx={{ mb: 2, bgcolor: '#444', input: { color: 'white' }, label: { color: 'white' } }}
             />
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Button variant="outlined" onClick={() => onCreate(null)}>Cancel</Button>
+                <Button variant="outlined" onClick={() => onCreate(null)} sx={{ borderColor: 'white', color: 'white' }}>
+                    Cancel
+                </Button>
                 <Button variant="contained" color="primary" onClick={handleCreateNote}>
                     {initialTitle ? 'Update' : 'Create'}
                 </Button>
