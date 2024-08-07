@@ -24,7 +24,12 @@ const Dashboard = () => {
                         'x-auth-token': token,
                     },
                 });
-                setNotes(response.data);
+                // Assuming response.data contains the notes with `_id`
+                const notesWithId = response.data.map(note => ({
+                    ...note,
+                    id: note._id,
+                }));
+                setNotes(notesWithId);
             } catch (error) {
                 console.error('Error fetching notes:', error);
             }
@@ -43,10 +48,10 @@ const Dashboard = () => {
     const handleCreateOrUpdateNote = (note) => {
         if (note) {
             if (editingNote) {
-                setNotes(notes.map(n => n._id === editingNote._id ? { ...note, x: editingNote.x, y: editingNote.y } : n));
+                setNotes(notes.map(n => n.id === editingNote.id ? { ...note, id: editingNote.id, x: editingNote.x, y: editingNote.y } : n));
                 setEditingNote(null);
             } else {
-                setNotes([{ ...note, x: 50, y: 0 }, ...notes]);
+                setNotes([{ ...note, id: note._id, x: 50, y: 0 }, ...notes]);
                 setHighlightedNoteId(note._id);
             }
         }
@@ -54,7 +59,7 @@ const Dashboard = () => {
     };
 
     const handleEditNote = (id) => {
-        const noteToEdit = notes.find(n => n._id === id);
+        const noteToEdit = notes.find(n => n.id === id);
         setEditingNote(noteToEdit);
         setNewNoteEnable(true); 
     };
@@ -67,14 +72,14 @@ const Dashboard = () => {
                     'x-auth-token': token,
                 },
             });
-            setNotes(notes.filter(n => n._id !== id));
+            setNotes(notes.filter(n => n.id !== id));
         } catch (error) {
             console.error('Error deleting note:', error);
         }
     };
 
     const handleDragNote = (id, x, y) => {
-        setNotes(notes.map(note => note._id === id ? { ...note, x, y } : note));
+        setNotes(notes.map(note => note.id === id ? { ...note, x, y } : note));
     };
 
     const handleColorFilter = (color) => {
@@ -123,14 +128,14 @@ const Dashboard = () => {
             <div className="relative w-full h-full">
                 {filteredNotes.map((note) => (
                     <Note
-                        key={note._id}
-                        id={note._id}
+                        key={note.id}
+                        id={note.id}
                         initialTitle={note.title}
                         initialDescription={note.content}
                         initialX={note.x}
                         initialY={note.y}
                         style={{ backgroundColor: note.color }}
-                        isHighlighted={note._id === highlightedNoteId}
+                        isHighlighted={note.id === highlightedNoteId}
                         onEdit={handleEditNote}
                         onDelete={handleDeleteNote}
                         onDrag={handleDragNote}
