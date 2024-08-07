@@ -23,21 +23,8 @@ export const loginUser = async (credentials) => {
     return null; // Return null or handle the error appropriately
   }
 };
-export const fetchSignup = async (userDetails) => {
-  try {
-    const response = await fetch(`${API_URL}/auth/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userDetails),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log('Signup response:', data); // Log the response data
-    return data;
-  } catch (error) {
-    console.error('Error signing up:', error);
-    return null; // Return null or handle the error appropriately
-  }
+export const fetchSignup = async () => {
+  const response = await fetch(`${API_URL}/auth/Signup`);
+  const data = await response.json();
+  return data;
 };
