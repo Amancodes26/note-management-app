@@ -18,6 +18,13 @@ app.get('/', (req, res) => res.send('API Running'));
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', noteRoutes);
 
+let notes=[];
+app.post('/api/notes', (req, res) => {
+    const newNote = req.body;
+    notes.push(newNote);
+    res.status(201).json(newNote);
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

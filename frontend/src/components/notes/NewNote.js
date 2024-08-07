@@ -48,7 +48,7 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
     const handleChange = (event) => {
         const newValue = event.target.value;
         setGroup(newValue);
-        console.log(newValue); // Log the selected value directly
+        setSelectedColor(newValue);
     };
 
     const handleColorSelect = (color) => {
@@ -58,11 +58,27 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
     const handleCreateNote = () => {
         if (!title || !content) return;
 
-        onCreate({
+        const newNote = {
             id: uuidv4(),
             title,
             content,
             color: selectedColor || 'white',
+        };
+
+        fetch('/api/notes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newNote),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            onCreate(newNote);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
         });
 
         setTitle("");
