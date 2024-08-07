@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
     Box,
     Button,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
     TextField,
     Typography,
 } from "@mui/material";
@@ -34,22 +30,16 @@ const ColorCircle = styled("div")(({ theme, color }) => ({
 }));
 
 const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColor = '' }) => {
-    const [group, setGroup] = useState(initialColor); // Initialize with initialColor
-    const [selectedColor, setSelectedColor] = useState(initialColor);
+    // Default to "Pink" if initialColor is not provided
+    const defaultColor = colors[0].hex;
+    const [selectedColor, setSelectedColor] = useState(initialColor || defaultColor);
     const [title, setTitle] = useState(initialTitle);
     const [content, setContent] = useState(initialContent);
 
-    // Synchronize `selectedColor` and `group` if `initialColor` changes
+    // Synchronize `selectedColor` if `initialColor` changes
     useEffect(() => {
-        setGroup(initialColor);
-        setSelectedColor(initialColor);
-    }, [initialColor]);
-
-    const handleChange = (event) => {
-        const newValue = event.target.value;
-        setGroup(newValue);
-        setSelectedColor(newValue);
-    };
+        setSelectedColor(initialColor || defaultColor);
+    }, [initialColor, defaultColor]);
 
     const handleColorSelect = (color) => {
         setSelectedColor(color);
@@ -84,8 +74,7 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
 
         setTitle("");
         setContent("");
-        setSelectedColor("");
-        setGroup(""); // Reset state if needed
+        setSelectedColor(defaultColor); // Reset to default color
     };
 
     return (
@@ -101,20 +90,6 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
             <Typography variant="h6" gutterBottom sx={{ color: 'white' }}>
                 {initialTitle ? 'Edit Note' : 'New Note'}
             </Typography>
-            <FormControl fullWidth variant="outlined" sx={{ mb: 2 }} size="small">
-                <InputLabel sx={{ color: 'white' }}>Select a group</InputLabel>
-                <Select
-                    value={group} // Use `group` to set the selected value
-                    onChange={handleChange}
-                    label="Select a group"
-                    sx={{ bgcolor: '#444', color: 'white' }}>
-                    {colors.map((color) => (
-                        <MenuItem key={color.hex} value={color.hex}>
-                            {color.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
             <Box
                 sx={{
                     display: "flex",
