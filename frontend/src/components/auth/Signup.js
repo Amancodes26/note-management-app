@@ -69,7 +69,7 @@ const Signup = () => {
             const data = await response.json();
             console.log('Success:', data);
             // Redirect to login page or home page
-            navigate('/login');
+            navigate('/dashboard');
         } catch (error) {
             console.error('Error:', error.message);
         }

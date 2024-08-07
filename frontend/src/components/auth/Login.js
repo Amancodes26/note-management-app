@@ -64,7 +64,7 @@ const Login = () => {
             // Store token in localStorage and navigate
             localStorage.setItem('token', data.token);
             console.log('Token stored:', localStorage.getItem('token'));
-            navigate('/'); // Redirect to a protected page
+            navigate('/dashboard'); // Redirect to a protected page
         } catch (error) {
             console.error('Error:', error.message);
         }
