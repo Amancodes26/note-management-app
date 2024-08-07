@@ -130,8 +130,10 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
                         style={{
                             border:
                                 selectedColor === color.hex
-                                    ? "2px solid white"
+                                    ? "3px solid white"
                                     : `2px solid ${color.hex}`,
+                            transform: selectedColor === color.hex ? 'scale(1.3)' : 'scale(1)', // Scale up the selected color
+                            transition: 'transform 0.2s ease-in-out', // Smooth transition for scaling
                         }}
                     />
                 ))}
