@@ -2,7 +2,7 @@
 
 ## Note Management App Backend
 
-This README provides documentation for the backend of the Note Management App. The backend is built using Node.js and Express.js, and it handles the creation, retrieval, updating, and deletion of notes.
+This README provides documentation for the setup of the Note Management App. The backend is built using Node.js and Express.js, and it handles the creation, retrieval, updating, and deletion of notes.
 
 ### Prerequisites
 
@@ -172,3 +172,33 @@ This README provides documentation for the backend of the Note Management App. T
 
     Handles the connection to the MongoDB database using Mongoose.
 
+
+
+##
+
+
+## Note Management App Frontend
+
+The frontend is build using react js and it's various libraries.
+
+## Local Setup
+
+### Frontend
+
+1. Navigate to the `frontend` folder:
+
+    ```sh
+    cd frontend
+    ```
+
+2. Install all dependencies:
+
+    ```sh
+    npm install
+    ```
+
+3. Run the React app:
+
+    ```sh
+    npm start
+    ```
