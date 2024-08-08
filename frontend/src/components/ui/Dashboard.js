@@ -72,7 +72,7 @@ const Dashboard = () => {
                     'x-auth-token': token,
                 },
             });
-            setNotes(notes.filter(n => n.id !== id));
+            setNotes(prevNotes => prevNotes.filter(n => n.id !== id));//update
         } catch (error) {
             console.error('Error deleting note:', error);
         }
