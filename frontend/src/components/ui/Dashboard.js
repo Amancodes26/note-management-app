@@ -19,7 +19,7 @@ const Dashboard = () => {
         const fetchNotes = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('http://localhost:5000/api/notes', {
+                const response = await axios.get('https://note-management-app-orpin.vercel.app/api/notes', {
                     headers: {
                         'x-auth-token': token,
                     },
@@ -67,7 +67,7 @@ const Dashboard = () => {
     const handleDeleteNote = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:5000/api/notes/${id}`, {
+            await axios.delete(`https://note-management-app-orpin.vercel.app/api/notes/${id}`, {
                 headers: {
                     'x-auth-token': token,
                 },

@@ -55,7 +55,7 @@ const NewNote = ({ onCreate, initialTitle = '', initialContent = '', initialColo
             title
         };
 
-        fetch('http://localhost:5000/api/notes', {
+        fetch('https://note-management-app-orpin.vercel.app/api/notes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
